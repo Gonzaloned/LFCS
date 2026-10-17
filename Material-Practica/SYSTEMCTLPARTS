@@ -1,0 +1,39 @@
+Encargados de Area
+├── Servicios  ->   systemctl
+├── Logs -> jornalctl o dmesk(K)
+├── Red -> networkctl
+├── DNS -> resolvectl 
+├── Hora -> timedatectl  
+├── Hostname -> hotsnamectl  
+├── Usuarios/Sesiones 
+├── Locales y teclado -> localectl
+├── Boot ->  systemd-analize
+└── Performance 
+
+ALMACENAMIENTOS Y CONFIGURACIONES
+├── Servicios   
+        conf ADMIN >/etc/systemd/system/
+        conf PKG> /usr/lib/system/system
+
+├── Logs  /run/log/journal/ OR /var/log/journal
+        conf /etc/systemd/journal
+
+├── Red DELEGA NetPlan .yml or NetworkManager nmcli
+        conf /etc/systemd/network
+
+├── DNS  DELEGA DHCP, NetPlan, NM, etc.
+        conf /etc/systemd/resolved.conf
+
+├── Hora /etc/localtime,  puede delegar CHRONYD o NTPD
+        conf /etc/systemd/timesyncd.conf
+
+├── Hostname  /etc/hostname,  /etc/hosts (statics)
+
+├── Usuarios/Sesiones
+        conf /etc/systemd/logind.conf
+
+├── Locales y teclado /usr/lib/locale/  /etc/default/keyboard
+        conf /etc/default/locale
+
+├── Boot   systemd-analizy
+└── Performance commands check cpu, mem, I/O, network, boot

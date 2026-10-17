@@ -1,0 +1,12 @@
+1 sed '3d' sed_lab.conf
+2 sed -n '25p' sed_lab.conf
+3 sed -n '100,110p' sed_lab.conf
+4 sed '50,75d' sed_lab.conf
+5 sed -E '/^#/d' sed_lab.conf
+6 sed -E '/^$/d' sed_lab.conf 
+7 sed -E '/^$|^#/d' sed_lab.conf 
+8 sed 's/oldserver/newserver/' sed_lab.conf 
+9 sed 's/oldserver/newserver/g' sed_lab.conf 
+10 sed -E 's/^server/host/' sed_lab.conf 
+
+

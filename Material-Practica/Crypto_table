@@ -1,0 +1,28 @@
+                   CRIPTOGRAFÍA
+                         │
+              operaciones criptográficas
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+     CIFRADO            HASH             FIRMA
+        │                │                │
+   AES / ChaCha        SHA-256       RSA / Ed25519
+        │                │                │
+        └────────────────┼────────────────┘
+                         │
+                    PROTOCOLOS
+                         │
+        ┌────────────────┼────────────────┐
+        │                │                │
+       TLS              SSH            OpenPGP
+        │                │                │
+      HTTPS        acceso remoto    archivos/mail
+        │                │                │
+    OpenSSL          OpenSSH           GnuPG
+        │                │                │
+     Apache/          ssh/sshd          gpg
+      Nginx
+SSH      → OpenSSH → acceso remoto
+TLS      → OpenSSL → HTTPS/certificados/TLS
+OpenPGP  → GnuPG  → cifrado/firma de archivos/mail
+VPN      → WireGuard / strongSwan → VPN

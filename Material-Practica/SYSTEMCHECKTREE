@@ -1,0 +1,354 @@
+                    NO ARRANCA
+                         │
+                         ▼
+        ¿UEFI encuentra una entrada BootXXXX?
+                         │
+             ┌───────────┴───────────┐
+             │                       │
+            NO                      SÍ
+             │                       │
+             ▼                       ▼
+    Reconstruir NVRAM        ¿Existe el archivo EFI?
+      (efibootmgr)           (shimx64.efi / bootmgfw.efi)
+                                     │
+                        ┌────────────┴────────────┐
+                        │                         │
+                       NO                        SÍ
+                        │                         │
+                        ▼                         ▼
+            Reinstalar GRUB             ¿GRUB inicia?
+             (grub2-install)                  │
+                                              │
+                                 ┌────────────┴────────────┐
+                                 │                         │
+                                NO                        SÍ
+                                 │                         │
+                                 ▼                         ▼
+                       Revisar/recrear           ¿Existe grub.cfg?
+                       archivos EFI                    │
+                                                      │
+                                         ┌────────────┴────────────┐
+                                         │                         │
+                                        NO                        SÍ
+                                         │                         │
+                                         ▼                         ▼
+                                grub2-mkconfig       ¿Existe vmlinuz?
+                                                             │
+                                                ┌────────────┴────────────┐
+                                                │                         │
+                                               NO                        SÍ
+                                                │                         │
+                                                ▼                         ▼
+                                   Reinstalar kernel        ¿Existe initramfs?
+                                                                │
+                                                   ┌────────────┴────────────┐
+                                                   │                         │
+                                                  NO                        SÍ
+                                                   │                         │
+                                                   ▼                         ▼
+                                          dracut --force          ¿systemd arranca?
+                                                                          │
+                                                             ┌────────────┴────────────┐
+                                                             │                         │
+                                                            NO                        SÍ
+                                                             │                         │
+                                                             ▼                         ▼
+                                                  Revisar root, fstab,        Sistema inicia
+                                                  SELinux, drivers, etc.
+
+
+Firmware UEFI
+        │
+        ▼
+shimx64.efi
+        │
+        ▼
+grubx64.efi
+        │
+        ▼
+grub.cfg
+        │
+        ▼
+vmlinuz
+        │
+        ▼
+initramfs.img
+        │
+        ▼
+/init
+        │
+        ▼
+systemd
+
+──────────────────────────────────────────────────────────────────────────────
+1) Encendés la PC
+──────────────────────────────────────────────────────────────────────────────
+Programa ejecutándose:
+    CPU → Firmware UEFI
+
+Archivo:
+    Firmware grabado en la memoria flash de la motherboard
+    (o OVMF.fd en una VM)
+
+Hace:
+    Inicializa CPU, RAM, PCI, discos, etc.
+
+
+──────────────────────────────────────────────────────────────────────────────
+2) Lee la NVRAM
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    Firmware UEFI
+
+Archivo:
+    Variables UEFI (NVRAM)
+
+Ejemplo:
+    Boot0003 → \EFI\fedora\shimx64.efi
+
+Hace:
+    Decide qué dispositivo arrancar.
+
+
+──────────────────────────────────────────────────────────────────────────────
+3) Busca el archivo EFI
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    Firmware UEFI
+
+Archivo:
+    ESP (EFI System Partition)
+
+    /boot/efi/EFI/fedora/shimx64.efi
+
+Hace:
+    Abre ese archivo desde la partición FAT32.
+
+
+──────────────────────────────────────────────────────────────────────────────
+4) Verifica la firma
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    Firmware UEFI
+
+Archivos involucrados:
+
+    shimx64.efi
+
+Contra:
+
+    db
+    KEK
+    PK
+
+(del firmware)
+
+Hace:
+    Comprueba que shim esté firmado por una CA autorizada
+    (normalmente Microsoft).
+
+
+──────────────────────────────────────────────────────────────────────────────
+5) Ejecuta shim
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    shimx64.efi
+
+Archivo ejecutándose:
+
+    EFI/fedora/shimx64.efi
+
+Hace:
+    Se convierte en el programa activo.
+
+
+──────────────────────────────────────────────────────────────────────────────
+6) shim verifica GRUB
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    shim
+
+Archivo:
+
+    EFI/fedora/grubx64.efi
+
+Contra:
+
+    Certificados Fedora
+    +
+    MOK (si existen)
+
+Hace:
+    Comprueba que GRUB sea confiable.
+
+
+──────────────────────────────────────────────────────────────────────────────
+7) Ejecuta GRUB
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    grubx64.efi
+
+Archivo ejecutándose:
+
+    EFI/fedora/grubx64.efi
+
+Hace:
+    Comienza el bootloader.
+
+
+──────────────────────────────────────────────────────────────────────────────
+8) GRUB lee su configuración
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    GRUB
+
+Archivo:
+
+    /boot/grub2/grub.cfg
+
+Hace:
+    Descubre:
+
+        • qué kernel arrancar
+        • qué initramfs usar
+        • parámetros del kernel
+        • menú
+
+
+──────────────────────────────────────────────────────────────────────────────
+9) GRUB carga el kernel
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    GRUB
+
+Archivo:
+
+    /boot/vmlinuz-6.x.x
+
+Hace:
+    Copia el kernel a memoria.
+
+
+──────────────────────────────────────────────────────────────────────────────
+10) GRUB carga el initramfs
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    GRUB
+
+Archivo:
+
+    /boot/initramfs-6.x.x.img
+
+Hace:
+    Copia el initramfs a memoria.
+
+
+──────────────────────────────────────────────────────────────────────────────
+11) Salta al kernel
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    Kernel Linux
+
+Archivo ejecutándose:
+
+    vmlinuz
+
+Hace:
+    Empieza Linux.
+
+
+──────────────────────────────────────────────────────────────────────────────
+12) El kernel descomprime initramfs
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    Kernel
+
+Archivo:
+
+    initramfs.img
+
+Hace:
+    Lo monta como root temporal.
+
+
+──────────────────────────────────────────────────────────────────────────────
+13) Ejecuta /init
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    /init
+
+Archivo:
+
+    /init
+(dentro del initramfs)
+
+Hace:
+    Empieza el entorno de rescate del initramfs.
+
+
+──────────────────────────────────────────────────────────────────────────────
+14) Encuentra la raíz real
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    dracut (o scripts del initramfs)
+
+Archivos:
+
+    LVM
+    RAID
+    LUKS
+    Drivers
+    UUID
+
+Hace:
+    Encuentra el verdadero sistema de archivos.
+
+
+──────────────────────────────────────────────────────────────────────────────
+15) switch_root
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    initramfs
+
+Hace:
+    Cambia:
+
+        raíz temporal
+
+            ↓
+
+        raíz definitiva (/)
+
+
+──────────────────────────────────────────────────────────────────────────────
+16) Ejecuta systemd
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    systemd
+
+Archivo:
+
+    /usr/lib/systemd/systemd
+
+Hace:
+    Se convierte en PID 1.
+
+
+──────────────────────────────────────────────────────────────────────────────
+17) Arranca Linux
+──────────────────────────────────────────────────────────────────────────────
+Programa:
+    systemd
+
+Archivos:
+
+    /etc/fstab
+
+    unidades .service
+
+    targets
+
+Hace:
+    Monta discos, inicia servicios y presenta el login.
+
+

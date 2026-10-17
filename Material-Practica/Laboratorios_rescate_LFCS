@@ -1,0 +1,82 @@
+Laboratorio 1 – Romper /etc/fstab (nivel fácil)
+
+Objetivo: Aprender rd.break, emergency mode y reparar configuraciones.
+Por ejemplo:
+cambiar un UUID por uno inexistente;
+agregar una entrada inválida.
+
+Deberías practicar:
+rd.break
+mount -o remount,rw /sysroot
+chroot /sysroot
+corregir fstab
+reiniciar
+OK
+
+Laboratorio 2 – Romper systemd
+Acá hay varias formas.
+Por ejemplo, renombrar el binario:
+mv /usr/lib/systemd/systemd /usr/lib/systemd/systemd.bak
+Cuando el kernel haga:
+init=/usr/lib/systemd/systemd
+no lo va a encontrar.
+Objetivo:
+entender qué hace el kernel cuando no encuentra el PID 1;
+recuperar el archivo desde un Live o desde otro entorno de rescate.
+OK
+
+Laboratorio 3 – Romper GRUB
+No hace falta borrar la ESP.
+Podés simplemente romper la configuración:
+/boot/grub2/grub.cfg
+o
+/boot/efi/EFI/fedora/grub.cfg
+(según la distribución).
+Después practicar:
+grub2-mkconfig ...
+OK
+
+Laboratorio 4 – Romper la ESP
+Este es excelente.
+Podés hacer algo como:
+mv EFI EFI.old
+o renombrar:
+grubx64.efi
+Así UEFI ya no encuentra el cargador.
+Practicar efibootmgr
+OK
+
+Laboratorio 5 – Romper /boot
+En vez de eliminar la partición completa, yo empezaría renombrando: vmlinuz o initramfs
+Vas a ver errores distintos.
+Después:
+reinstalar el paquete del kernel;
+regenerar initramfs;
+reconstruir GRUB.
+Después practicar:
+grub-install
+
+Laboratorio 6 – Romper SELinux
+
+Muy útil.
+Por ejemplo:
+cambiar contextos;
+crear archivos con etiquetas incorrectas;
+usar restorecon.
+
+Laboratorio 7 – Romper el initramfs
+Por ejemplo:
+borrar el initramfs;
+generar uno incorrecto;
+sacar un driver crítico (si sabés exactamente qué hacés).
+
+Después:
+dracut --force
+
+Laboratorio 8 – Romper el bootloader
+Por ejemplo:
+borrar la entrada UEFI;
+cambiar el orden de boot;
+eliminar el registro desde UEFI.
+
+Después reconstruirlo.

@@ -1,0 +1,22 @@
+Y los átomos principales:
+
+a           carácter literal
+.           cualquier carácter
+[abc]       uno de a/b/c
+[^abc]      cualquier carácter excepto a/b/c
+(...)       grupo (ERE)
+^           comienzo
+$           final
+
+Después vienen los cuantificadores:
+
+*           0 o más
++           1 o más
+?           0 o 1
+{n}         exactamente n
+{n,}        n o más
+{n,m}       entre n y m
+
+$1   $2             $3       $4           $5   $6
+│    │              │        │            │    │
+host IP             SO       ambiente     CPU  estado
