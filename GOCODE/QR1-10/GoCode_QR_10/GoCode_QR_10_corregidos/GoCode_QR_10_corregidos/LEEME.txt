@@ -1,0 +1,20 @@
+GoCode - 10 códigos QR con G de Google original (versión corregida)
+
+CONTENIDO
+- PNG_45mm_600dpi/: 10 PNG individuales, 45 x 45 mm, 600 DPI.
+- SVG_vector/: 10 SVG con módulos QR vectoriales y el logo G proporcionado por el usuario incrustado en PNG de alta resolución.
+- G_Google_original_recortada.png: arte G original, recortado únicamente al área no transparente; no se deformó.
+- Listado_QR.csv: URL correspondiente a cada código y controles de lectura.
+
+CARACTERÍSTICAS
+- URLs: https://qr01.gocode.com.ar hasta https://qr10.gocode.com.ar
+- Corrección de errores: nivel H.
+- Margen blanco de seguridad: 4 módulos QR.
+- La G conserva el diseño y proporción del archivo que proporcionó el usuario.
+- La G se redujo a aproximadamente el 10,5 % del ancho de la zona activa del QR.
+- Se agregó un disco blanco pequeño detrás de la G para evitar que módulos negros se vean a través de las áreas transparentes del logo.
+- No se modificaron los destinos URL.
+
+VERIFICACIÓN
+Los 10 PNG fueron decodificados correctamente con OpenCV tanto a tamaño completo como reducidos al 50 %.
+Esto verifica la estructura del código digital, pero antes de fabricar en serie conviene escanear una impresión física de prueba.

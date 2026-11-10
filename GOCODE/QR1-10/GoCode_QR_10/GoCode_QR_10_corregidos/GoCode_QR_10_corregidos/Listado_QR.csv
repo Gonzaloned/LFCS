@@ -1,0 +1,11 @@
+﻿numero,url,png,svg,qr_version,logo_ancho_px,circulo_blanco_px,opencv_600dpi,opencv_50porciento
+QR01,https://qr01.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR01.png,SVG_vector/GoCode_QR01.svg,4,87,113,OK,OK
+QR02,https://qr02.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR02.png,SVG_vector/GoCode_QR02.svg,4,87,113,OK,OK
+QR03,https://qr03.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR03.png,SVG_vector/GoCode_QR03.svg,4,87,113,OK,OK
+QR04,https://qr04.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR04.png,SVG_vector/GoCode_QR04.svg,4,87,113,OK,OK
+QR05,https://qr05.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR05.png,SVG_vector/GoCode_QR05.svg,4,87,113,OK,OK
+QR06,https://qr06.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR06.png,SVG_vector/GoCode_QR06.svg,4,87,113,OK,OK
+QR07,https://qr07.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR07.png,SVG_vector/GoCode_QR07.svg,4,87,113,OK,OK
+QR08,https://qr08.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR08.png,SVG_vector/GoCode_QR08.svg,4,87,113,OK,OK
+QR09,https://qr09.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR09.png,SVG_vector/GoCode_QR09.svg,4,87,113,OK,OK
+QR10,https://qr10.gocode.com.ar,PNG_45mm_600dpi/GoCode_QR10.png,SVG_vector/GoCode_QR10.svg,4,87,113,OK,OK

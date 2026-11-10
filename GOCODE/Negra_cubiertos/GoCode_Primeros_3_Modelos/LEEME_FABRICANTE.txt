@@ -1,0 +1,25 @@
+GOCODE - PRIMEROS 3 MODELOS NEGROS
+
+CONTENIDO
+- DTF_Frentes/SVG: tres artes vectoriales transparentes, uno por QR.
+- DTF_Frentes/PNG_600dpi: los mismos tres frentes en PNG transparente a 600 dpi y 70 x 120 mm.
+- Laser_Dorso: un unico arte de dorso, comun a las tres tarjetas, con el centro libre para el sticker NFC.
+- Vista_previa: imagen de referencia sobre fondo negro y PDF de prueba visual a escala 1:1.
+
+IDENTIFICACION
+N0001 -> https://qr01.gocode.com.ar
+N0002 -> https://qr02.gocode.com.ar
+N0003 -> https://qr03.gocode.com.ar
+
+INSTRUCCIONES PARA PRODUCCION
+1. Las medidas de cada tarjeta son 70 x 120 mm, verticales.
+2. Los frentes DTF tienen fondo TRANSPARENTE. El acrilico negro es el fondo fisico: NO imprimir una placa negra completa.
+3. En los QR, los modulos negros estan transparentes para que se vean negros sobre el acrilico. El area blanca del QR y la G multicolor deben imprimirse. Mantener tinta blanca opaca debajo de los elementos claros.
+4. Cada frente tiene su propio QR y numero discreto N0001, N0002 o N0003 en la esquina inferior derecha. No intercambiar archivos.
+5. El dorso es uno solo y se repite en las tres tarjetas. El centro esta vacio para colocar el sticker NFC; no grabar ni imprimir sobre esa zona.
+6. El archivo SVG del dorso indica las areas a grabar en gris claro. El aspecto final (gris, blanco o esmerilado) depende del acrilico y de los parametros del laser; confirmar con el fabricante.
+7. El PDF es SOLO una prueba visual sobre fondo negro. Para imprimir, usar los PNG transparentes o los SVG de DTF; para el laser, usar el SVG del dorso.
+8. No cambiar escala, proporcion ni contenido de los QR. Los QR de origen fueron decodificados y corresponden a las URLs indicadas.
+
+NOTA NFC
+El sticker NFC va centrado en el dorso. El dibujo/leyenda del NFC del frente indica la zona de lectura aproximada; comprobar la alineacion fisica al pegar el sticker.
